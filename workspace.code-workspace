@@ -2,6 +2,10 @@
 	"folders": [
 		{
 			"path": "JtagDebug"
+		},
+		{
+			"name": "WebDebug",
+			"path": "WebDebug"
 		}
 	],
 	"settings": {}

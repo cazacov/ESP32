@@ -1,0 +1,7 @@
+POST http://192.168.178.61/data
+content-type: application/json
+
+{
+    "base64": "SGVsbG8gd29ybGQh",
+    "german": "Käsesoßenrührlöffel"
+}
