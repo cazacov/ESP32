@@ -1,0 +1,12 @@
+### GET with the roow path
+GET http://192.168.178.103/
+
+
+### POST JSON structure with integer and string field
+POST http://192.168.178.103/post-json
+content-type: application/json; charset=utf-8
+
+{
+  intValue: 42,
+  stringValue: "Käsesoßenrührlöffel ЗДРАВСТВУЙ МИР!"
+}
