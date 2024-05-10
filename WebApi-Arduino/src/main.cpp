@@ -3,6 +3,9 @@
 #include <ESPAsyncWebServer.h>
 #include <ArduinoJson.h>
 
+#define BUFFER_SIZE 200
+char buffer[BUFFER_SIZE];
+
 
 // Stores ssid and password 
 #include "secrets.h"
@@ -38,7 +41,7 @@ void setup() {
    {
     // Check if the total size of the expected data is greater than zero
     if (total > 0) {
-      DynamicJsonDocument doc(1024);
+      JsonDocument doc;
       DeserializationError error = deserializeJson(doc, data);
       if (error) {
         Serial.print(F("deserializeJson() failed: "));
@@ -50,8 +53,9 @@ void setup() {
       int intValue = doc["intValue"]; // Extract integer value
       const char* stringValue = doc["stringValue"]; // Extract string value
 
-      String message = "Received int: " + String(intValue) + ", string: " + stringValue;
-      request->send(200, "text/plain", message);
+      // Use char* instead of the String class to reduce memory fragmentation
+      sniprintf(buffer, BUFFER_SIZE, "Received int: %d, string: %s", intValue, stringValue);
+      request->send(200, "text/plain", buffer);
     } else {
       request->send(400, "text/plain", "Bad Request: No JSON found");
     }
